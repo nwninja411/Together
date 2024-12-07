@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Here I am making it so the webpage displays correctly on any size screen-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Name the tab of the webpage-->
+        <title>All Together Now</title>
+    </head>
+    <style>
+         @font-face {
+        /*Here I am naming my font so that I can refernce it*/
+        font-family: 'RingBearer';
+        /*Here I am linking my font file so that when I refernce it it knows what the font looks like*/
+        src: url('RingbearerMedium-51mgZ.ttf') format('truetype');
+        /*these tags let the code know that the style and weight should be normal rather than bold or italic*/
+        font-weight: normal; 
+        font-style: normal; 
+        }
+        body{
+            font-family: 'RingBearer', serif;
+            background: url('Map-transformed.jpeg');
+            background-size: 120vh;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            margin: 0;
+            height: 100vh;
+            background-color: rgb(120,122,112);
+        }
+        h1{
+            color: rgb(60,35,14);
+        }
+        #Game {
+                position: absolute;
+                bottom: 18%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                max-width: 300px;
+                border: 5px solid rgb(96,68,47);
+                background-color: rgba(0, 0, 0, .8);
+                border-radius: 10px;
+                padding: 5px;
+                color: rgb(192,179,161);
+            }
+        #Map{
+            position: relative;
+            width: 100%;
+            max-width: 1200PX;
+            height: 100%;
+            margin: 0 auto;
+        
+        }
+        #Player{
+            position: absolute;
+            background-image: url('Icon-transformed.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            transition: top .9s ease, left .9s ease;
+        }
+        button{
+            font-family: 'RingBearer', serif;
+            padding: 10px 20px;
+            margin: 3px;
+            background-color: rgb(120,122,112);
+            border: none;
+            color: rgb(223, 207, 186);
+            border-radius: 5px;
+        }
+        button:hover {
+            transform: scale(1.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                background-color: rgb(147, 150, 138);
+            }
+    </style>
+    <body>
+        <h1>One Journey to Rule Them All</h1>
+    <div id="Map">
+        <div id="Player" style="top: 17%; left: 30%;"></div>
+        <div id="Game">
+            <p id="question">Do you wish to leave the shire with Gandalf?</p>
+            <button onClick="chooseAnswer('no')">No</button>
+            <button onClick="chooseAnswer('yes')">Yes</button>
+        </div>
+    </div>
+    <script>
+        //Welcome to Javascript land
+        //Lets create the questions and answers followed by the updated placement of the players icon
+        const Game = [
+        {
+        question: "Do you wish to leave the shire with Gandalf?", 
+        correct: "yes",
+        position: {top: "19%", left: "33.5%"}
+    },
+        {
+        question: "You hear a horse galloping in the distance. Do you wish to stay on the road and see who it is?",
+        correct: "no",
+        position: {top: "19%", left: "33.5%"}
+    },
+        {
+        question: "That was a close call. You almost got discoverd by a Black Rider! You must be shaken up, do you still wish to continue on to bree?",
+        correct: "yes",
+        position: {top: "19%", left: "35.4%"}
+    },
+        {
+        question: "Congratulations you have made it to bree! Click yes when you are ready to carry on your journey.",
+        correct: "yes",
+        position: {top: "19%", left: "35.4%"}
+    },
+        {
+        question: "Who is this strange fellow in the corner staring at you? Should you igrnoe him?",
+        correct: "no",    
+        position: {top: "19%", left: "35.4%"}
+    },
+    //This is a very repetive task
+        {
+        question: "You've introduced yourself to this stranger and he gives the name of Strider. He asks to join you on your journey. Shall you allow him to join?",
+        correct: "yes",    
+        position: {top: "19%", left: "35.4%"}
+    },
+        {
+        question: "Strider-'are you ready to leave Bree'",
+        correct: "yes",    
+        position: {top: "18.9%", left: "42%"}
+    },
+        {
+        question: "You have journyed far to Weathertop but the Black Riders are approacing fast! Do you wish to put on the ring and stay hidden?",
+        correct: "yes",    
+        position: {top: "18.9%", left: "42%"}
+    }, 
+        {
+        question: "What a costly mistake that was! You are now in grave danger and on the verge of death. Do you wish to accept your fate and never make it to Rivendell?",
+        correct: "no",    
+        position: {top: "15.5%", left: "50.4%"}
+    }, 
+        {
+        question: "Gandalf-'Frodo my dear friend! You have a lot of spirit for a Hobbit! Quickly press yes to continue as there is not much time!",
+        correct: "yes",    
+        position: {top: "15.5%", left: "50.4%"}
+    }, 
+        {
+        question: "Gandalf-'Good Frodo! quickly now, I need to know if you accept that task of carrying the burden of the ring to the mountains of Mordor?",
+        correct: "yes",    
+        position: {top: "15.5%", left: "50.4%"}
+    }, 
+        {
+        question: "Gandalf- Very well frodo! I need to know now. Do you trust my guidance through my mines of Moria?",
+        correct: "yes",    
+        position: {top: "28%", left: "50.5%"}
+    }, 
+        {
+        question: "You and your fellowship have made it out of the mines. You unfortunately lost Gandalf though. Do you wish to turn back to the shire and avoid the long road ahead?",
+        correct: "no",    
+        position: {top: "28%", left: "50.5%"}
+    }, 
+        {
+        question: "You see an elf in the distance. Do you wish to trust them for protection?",
+        correct: "yes",    
+        position: {top: "30%", left: "53%"}
+    }, 
+        {
+        question: "Congratulations you have made it to Lorien! Press yes to continue.",
+        correct: "yes",    
+        position: {top: "30%", left: "53%"}
+    }, 
+    //Still going!?
+        {
+        question: "The elfs are offering you boats to travel down the Anduin river. Do you wish to accept?",
+        correct: "yes",    
+        position: {top: "51%", left: "62%"}
+    }, 
+        {
+        question: "You have made it to land. Do you wish to stick by the campfire Strider has setup?",
+        correct: "no",    
+        position: {top: "51%", left: "62%"}
+    }, 
+        {
+        question: "Your fellowship has just been attacked. Do you wish to keep the fellowship togehther for the rest of your journey?",
+        correct: "no",    
+        position: {top: "51%", left: "73.2%"}
+    }, 
+        {
+        question: "You have made it to Mordor! Will you complete your mission and destory the ring?",
+        correct: "yes",    
+        position: {top: "51%", left: "73.2%"}
+    }, 
+    //Finally
+];
+        //Now lets create a function to handle wheter the player has chosen the correct answer.\
+        let currentStep = 0;
+        function chooseAnswer(choice) {
+            //Here I am creating a function to update the players Icon
+            if (choice === Game[currentStep].correct) {
+                const player = document.getElementById("Player");
+                player.style.top = Game[currentStep].position.top;
+                player.style.left = Game[currentStep].position.left;
+            //Now I will update the question we are on
+                currentStep++;
+            //Now I will check for a win condition or a lose condition then give a prompt depnding on the outcome
+            if(currentStep <Game.length) {
+                const questionBox = document.getElementById("question");
+                questionBox.innerText = Game[currentStep].question;
+            }
+            //Create messages to let the player know whether they have won or lost
+            else {
+                alert("You’ve done it! The Ring is destroyed, and Middle-earth is saved! Rest now, for the hardest part of the journey is behind you.");
+            }}
+             else {
+                alert("Fool of a Took! You cannot undo what is done. Start again, but tread carefully this time.");
+            }
+            }
+            //Close the script tags and then I am done
+    </script>
+    </body>
+</html>
